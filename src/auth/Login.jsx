@@ -1,21 +1,23 @@
 import { Box, Button, Flex, Text, Input } from "@chakra-ui/react";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
-  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   TwitterAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { auth } from "../config/firebase";
 import { useState } from "react";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const provider = new TwitterAuthProvider();
+  const navigate = useNavigate();
   const signInWithEmail = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, username, password);
+      await signInWithEmailAndPassword(auth, username, password);
       setUsername("");
       setPassword("");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -31,7 +33,7 @@ const Login = () => {
     <>
       <Flex alignItems={"center"} justifyContent={"center"} h={"100vh"} p={3}>
         <Box maxW={"450px"}>
-          <Text fontSize={"2xl"} mb={5}>
+          <Text fontSize={"2xl"} textAlign={"center"} mb={5}>
             Log In with your Twitter account
           </Text>
           <Input
@@ -56,9 +58,9 @@ const Login = () => {
           >
             Log In
           </Button>
-          <a href="#" className="mb-4">
-            Forget password
-          </a>
+          <NavLink to={"/signup"} className="mb-4">
+            Don't have a account Signup
+          </NavLink>
           <p className="mb-8 text-center w-full">or</p>
           <Button
             w={"full"}
