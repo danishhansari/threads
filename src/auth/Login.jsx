@@ -5,6 +5,7 @@ import {
   TwitterAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { auth } from "../config/firebase";
 import { useState } from "react";
 
 const Login = () => {
@@ -14,7 +15,14 @@ const Login = () => {
   const navigate = useNavigate();
   const signInWithEmail = async () => {
     try {
-      await signInWithEmailAndPassword(auth, username, password);
+      const userData = await signInWithEmailAndPassword(
+        auth,
+        username,
+        password
+      );
+      console.log(userData);
+      const userJsonData = JSON.stringify(userData);
+      localStorage.setItem("user", userJsonData);
       setUsername("");
       setPassword("");
       navigate("/");
@@ -24,7 +32,10 @@ const Login = () => {
   };
   const signInWithTwitter = async () => {
     try {
-      await signInWithPopup(auth, provider);
+      const data = await signInWithPopup(auth, provider);
+      const userJsonData = JSON.stringify(data);
+      localStorage.setItem("user", userJsonData);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -32,8 +43,8 @@ const Login = () => {
   return (
     <>
       <Flex alignItems={"center"} justifyContent={"center"} h={"100vh"} p={3}>
-        <Box maxW={"450px"}>
-          <Text fontSize={"2xl"} textAlign={"center"} mb={5}>
+        <Box maxW={"360px"}>
+          <Text fontSize={"xl"} textAlign={"center"} mb={5}>
             Log In with your Twitter account
           </Text>
           <Input
@@ -59,9 +70,8 @@ const Login = () => {
             Log In
           </Button>
           <NavLink to={"/signup"} className="mb-4">
-            Don't have a account Signup
+            <Text textAlign={"center"}>Don't have a account Signup</Text>
           </NavLink>
-          <p className="mb-8 text-center w-full">or</p>
           <Button
             w={"full"}
             mt={5}

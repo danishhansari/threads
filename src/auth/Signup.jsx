@@ -18,17 +18,26 @@ const Signup = () => {
       return;
     }
     try {
-      await createUserWithEmailAndPassword(
+      const userData = await createUserWithEmailAndPassword(
         auth,
         credentials.username,
         credentials.password
       );
-      setCredentials("");
+      console.log(userData);
+      setCredentials({
+        name: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+      });
+      const userJsonData = JSON.stringify(userData);
+      localStorage.setItem("user", userJsonData);
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
+
   const handleInput = (e) => {
     setCredentials((prev) => ({
       ...prev,
@@ -38,8 +47,8 @@ const Signup = () => {
   return (
     <>
       <Flex alignItems={"center"} justifyContent={"center"} h={"100vh"} p={3}>
-        <Box maxW={"450px"}>
-          <Text fontSize={"2xl"} textAlign={"center"} mb={5}>
+        <Box maxW={"360px"}>
+          <Text fontSize={"xl"} textAlign={"center"} mb={5}>
             Log In with your Twitter account
           </Text>
           <Input
