@@ -41,7 +41,7 @@ const Login = () => {
   };
   return (
     <>
-      <div className="flex justify-center items-center h-screen py-3 px-2">
+      <div className="flex justify-center items-center h-screen py-3 px-2 overflow-hidden">
         <div className="max-w-[360px]">
           <p className="text-xl md:text-2xl text-center my-4 mb-2">Log In</p>
           <input

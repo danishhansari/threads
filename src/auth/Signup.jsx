@@ -45,7 +45,7 @@ const Signup = () => {
   };
   return (
     <>
-      <div className="flex items-center justify-center h-screen py-3 px-2">
+      <div className="flex items-center justify-center h-screen py-3 px-2 overflow-hidden">
         <div className="max-w-[360px]">
           <p className="text-xl md:text-2xl text-center mb-4">Signup User</p>
           <input
