@@ -1,4 +1,3 @@
-import { Text, Flex, Input, Box, Button } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
@@ -8,7 +7,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     name: "",
-    username: "",
+    email: "",
     password: "",
     confirmPassword: "",
   });
@@ -20,7 +19,7 @@ const Signup = () => {
     try {
       const userData = await createUserWithEmailAndPassword(
         auth,
-        credentials.username,
+        credentials.email,
         credentials.password
       );
       console.log(userData);
@@ -46,56 +45,56 @@ const Signup = () => {
   };
   return (
     <>
-      <Flex alignItems={"center"} justifyContent={"center"} h={"100vh"} p={3}>
-        <Box maxW={"360px"}>
-          <Text fontSize={"xl"} textAlign={"center"} mb={5}>
-            Log In with your Twitter account
-          </Text>
-          <Input
-            placeholder="Name"
-            type="email"
-            mb={5}
-            name="name"
+      <div className="flex items-center justify-center h-screen py-3 px-2">
+        <div className="max-w-[360px]">
+          <p className="text-xl md:text-2xl text-center mb-4">Signup User</p>
+          <input
+            type="text"
             value={credentials.name}
+            name="name"
+            className="w-full py-2 px-3 my-2 border border-gray-400 focus:outline-none
+            focus:border-gray-700 transition-all duration-75 rounded"
             onChange={handleInput}
+            placeholder="Name"
           />
-          <Input
-            placeholder="Username, phone and email"
+          <input
             type="email"
-            mb={5}
-            name="username"
-            value={credentials.username}
+            value={credentials.email}
+            name="email"
+            className="w-full py-2 px-3 my-2 border border-gray-400 focus:outline-none
+            focus:border-gray-700 transition-all duration-75 rounded"
             onChange={handleInput}
+            placeholder="Email "
           />
-          <Input
-            placeholder="Password"
-            mb={5}
+          <input
             type="password"
-            name="password"
             value={credentials.password}
+            name="password"
+            className="w-full py-2 px-3 my-2 border border-gray-400 focus:outline-none
+            focus:border-gray-700 transition-all duration-75 rounded"
             onChange={handleInput}
+            placeholder="Password "
           />
-          <Input
-            placeholder="Confirm password"
-            mb={5}
-            name="confirmPassword"
+          <input
             type="password"
             value={credentials.confirmPassword}
+            name="confirmPassword"
+            className="w-full py-2 px-3 my-2 border border-gray-400 focus:outline-none
+            focus:border-gray-700 transition-all duration-75 rounded"
             onChange={handleInput}
+            placeholder="Confirm Password"
           />
-          <Button
-            w={"full"}
-            colorScheme="teal"
-            mb={5}
+          <button
             onClick={signUpWithEmail}
+            className="w-full py-2 rounded my-2 hover:bg-teal-600 transition-colors duration-75 font-medium bg-teal-500 text-white"
           >
             Log In
-          </Button>
-          <NavLink to={"/login"} className="mb-4">
-            Already have a Login
+          </button>
+          <NavLink to={"/login"}>
+            <p className="mb-4 text-md text-center">Already have a Login</p>
           </NavLink>
-        </Box>
-      </Flex>
+        </div>
+      </div>
     </>
   );
 };

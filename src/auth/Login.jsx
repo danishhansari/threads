@@ -1,4 +1,3 @@
-import { Box, Button, Flex, Text, Input } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
@@ -42,46 +41,42 @@ const Login = () => {
   };
   return (
     <>
-      <Flex alignItems={"center"} justifyContent={"center"} h={"100vh"} p={3}>
-        <Box maxW={"360px"}>
-          <Text fontSize={"xl"} textAlign={"center"} mb={5}>
-            Log In with your Twitter account
-          </Text>
-          <Input
-            placeholder="Username, phone and email"
+      <div className="flex justify-center items-center h-screen py-3 px-2">
+        <div className="max-w-[360px]">
+          <p className="text-xl md:text-2xl text-center my-4 mb-2">Log In</p>
+          <input
             type="email"
-            mb={5}
             value={username}
+            className="w-full py-2 px-3 my-2 border border-gray-400 focus:outline-none
+            focus:border-gray-700 transition-all duration-75 rounded"
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username, phone and email"
           />
-          <Input
-            placeholder="Password"
-            mb={5}
+          <input
             type="password"
             value={password}
+            className="w-full py-2 px-3 my-2 border border-gray-400 focus:outline-none
+            focus:border-gray-700 transition-all duration-75 rounded"
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
           />
-          <Button
-            w={"full"}
-            colorScheme="teal"
-            mb={5}
+          <button
+            className="w-full py-2 rounded my-2 hover:bg-teal-600 transition-colors duration-75 font-medium bg-teal-500 text-white"
             onClick={signInWithEmail}
           >
-            Log In
-          </Button>
+            Log in
+          </button>
           <NavLink to={"/signup"} className="mb-4">
-            <Text textAlign={"center"}>Don't have a account Signup</Text>
+            <p className="text-center my-1">Don't have a account Signup</p>
           </NavLink>
-          <Button
-            w={"full"}
-            mt={5}
-            colorScheme="blue"
+          <button
+            className="w-full py-2 rounded my-2 hover:bg-blue-600 transition-colors duration-75 font-medium bg-blue-500 text-white"
             onClick={signInWithTwitter}
           >
             Continue with Twitter
-          </Button>
-        </Box>
-      </Flex>
+          </button>
+        </div>
+      </div>
     </>
   );
 };
