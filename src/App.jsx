@@ -4,6 +4,9 @@ import Signup from "./auth/Signup";
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
+import Activity from "./components/Activity";
+import Search from "./components/Search";
+import User from "./components/User";
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/activity" element={<Activity />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/user" element={<User />} />
       </Routes>
     </Router>
   );
