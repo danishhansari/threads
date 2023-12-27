@@ -11,9 +11,9 @@ import User from "./components/User";
 function App() {
   return (
     <Router>
-      {location.pathname !== "/login" && location.pathname !== "/signup" && (
-        <Navbar />
-      )}
+        {location.pathname !== "/login" && location.pathname !== "/signup" && (
+          <Navbar />
+        )}
       <Routes>
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
         <Route path="/login" element={<Login />} />
