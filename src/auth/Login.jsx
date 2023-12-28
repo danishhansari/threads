@@ -33,10 +33,8 @@ const Login = () => {
       const data = await signInWithPopup(auth, provider);
       const userJsonData = JSON.stringify(data);
       localStorage.setItem("user", userJsonData);
-      toast.success("successfully login");
       navigate("/");
     } catch (error) {
-      toast.error(error.message);
       console.log(error);
     }
   };
