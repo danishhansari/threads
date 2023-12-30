@@ -1,4 +1,4 @@
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useEffect, useState } from "react";
 import Tweet from "./Tweet";
@@ -6,17 +6,18 @@ import Tweet from "./Tweet";
 const TweetList = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    const fetchData = async () => {
-      const postQuery = query(collection(db, "post"));
-      const postsSnapshot = await getDocs(postQuery);
-      const posts = postsSnapshot.docs.map((doc) => ({
+    const postCollection = collection(db, "post");
+
+    const unsubscribe = onSnapshot(postCollection, (snapshot) => {
+      const updatedPosts = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
+      setPosts(updatedPosts);
       console.log(posts);
-      setPosts(posts);
-    };
-    fetchData();
+    });
+
+    return () => unsubscribe();
   }, []);
 
   return (
