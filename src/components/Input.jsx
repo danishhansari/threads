@@ -4,10 +4,13 @@ import { getAuth } from "firebase/auth";
 import { db } from "../config/firebase";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { format } from "date-fns";
+import Portal from "./Portal";
 
 const Input = () => {
   const [input, setInput] = useState("");
   const [isButtonDisabled, setButtonDisabled] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+
   const handleInput = (e) => {
     if (e.target.value === "") {
       setButtonDisabled(true);
@@ -53,6 +56,11 @@ const Input = () => {
       }
     }
   };
+
+  const renderPortal = () => {
+    setShowModal((prev) => setShowModal(!prev));
+  };
+
   return (
     <>
       <div className="flex min-h-1 w-full gap-4 py-4 border-b border-gray-500 justify-between items-center">
@@ -64,6 +72,7 @@ const Input = () => {
           onChange={handleInput}
           value={input}
           rows={1}
+          onFocus={renderPortal}
         />
         <button
           className="bg-white text-black rounded-md px-4 py-1 disabled:opacity-[.75]"
@@ -73,6 +82,7 @@ const Input = () => {
           Post
         </button>
       </div>
+      {showModal && <Portal state={showModal} toggleState={renderPortal} />}
     </>
   );
 };

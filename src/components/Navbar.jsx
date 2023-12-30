@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FaThreads } from "react-icons/fa6";
 import { NavLink, Link } from "react-router-dom";
 import { RiHome4Line } from "react-icons/ri";
@@ -6,9 +7,12 @@ import { FaRegPenToSquare } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
 import { HiMenuAlt3 } from "react-icons/hi";
+import Portal from "./Portal";
+
 const Navbar = () => {
+  const [showModal, setShowModal] = useState(false);
   const tweetPop = () => {
-    console.log("I got click");
+    setShowModal((prev) => setShowModal(!prev));
   };
   return (
     <>
@@ -51,6 +55,8 @@ const Navbar = () => {
           />
         </div>
       </div>
+
+      {showModal && <Portal state={showModal} toggleState={tweetPop} />}
     </>
   );
 };
