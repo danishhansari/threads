@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useState } from "react";
 
@@ -22,7 +22,12 @@ const Signup = () => {
         credentials.email,
         credentials.password
       );
-      console.log(userData);
+
+      const user = userData.user;
+      await updateProfile(user, {
+        displayName: credentials.name,
+      });
+      console.log(user)
       setCredentials({
         name: "",
         username: "",

@@ -7,11 +7,12 @@ const Input = () => {
 
   useEffect(() => {
     if (inputRef.current.focus()) {
-      setShowModal((prev) => setShowModal(!prev));
+      setShowModal((prev) => !prev);
     }
-  }, [inputRef]);
+  }, []);
+
   const renderPortal = () => {
-    setShowModal((prev) => setShowModal(!prev));
+    setShowModal((prev) => !prev);
   };
   const [showModal, setShowModal] = useState(false);
 

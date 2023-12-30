@@ -1,19 +1,34 @@
 import { useState } from "react";
 import { FaThreads } from "react-icons/fa6";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { RiHome4Line } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
-import { HiMenuAlt3 } from "react-icons/hi";
+import { auth } from "../config/firebase";
+import { signOut } from "firebase/auth";
+import { PiSignOutBold } from "react-icons/pi";
 import Portal from "./Portal";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const tweetPop = () => {
-    setShowModal((prev) => setShowModal(!prev));
+    setShowModal((prev) => !prev);
   };
+
+  const signOutUser = async () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/login");
+        localStorage.removeItem("user");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   return (
     <>
       <div className="sticky top-0 z-10 bg-black text-white py-4 w-full">
@@ -49,7 +64,8 @@ const Navbar = () => {
               </li>
             </NavLink>
           </ul>
-          <HiMenuAlt3
+          <PiSignOutBold
+            onClick={signOutUser}
             size={50}
             className="py-2 px-3 rounded hover:bg-white/10 hover:text-gray-200 text-gray-400"
           />
