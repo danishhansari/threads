@@ -27,8 +27,7 @@ const Signup = () => {
       await updateProfile(user, {
         displayName: credentials.name,
       });
-      console.log(user)
-      setCredentials({
+        setCredentials({
         name: "",
         username: "",
         password: "",

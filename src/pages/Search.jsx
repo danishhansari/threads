@@ -4,8 +4,8 @@ const Search = () => {
   return (
     <>
       <Navbar />
+      
     </>
   );
 };
-
 export default Search;

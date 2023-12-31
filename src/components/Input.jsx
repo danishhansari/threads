@@ -24,7 +24,7 @@ const Input = () => {
           style={{ resize: "none" }}
           placeholder="Start a thread"
           className="bg-transparent text-gray-100 text-lg focus:outline-none w-full"
-          onFocus={renderPortal}
+          onClick={renderPortal}
           ref={inputRef}
           rows={1}
         />
